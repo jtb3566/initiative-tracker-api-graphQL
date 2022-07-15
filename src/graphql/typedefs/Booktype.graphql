@@ -1,0 +1,7 @@
+#Types
+
+type BookType {
+    id: ID!
+    name: String!
+    pages: Int!
+}
