@@ -1,14 +1,13 @@
 import express from 'express';
-import expressGraphQL from 'express-graphql';
-import schema from './graphql/schema.js'
+import graphqlServer from './graphql';
 
-const app = express();
+async function startApolloServer() {
+    const app = express();
+    await graphqlServer.start()
+    graphqlServer.applyMiddleware({
+        app,
+    });
+    return app;
+}
 
-app.use('/graphql', expressGraphQL.graphqlHTTP({
-    schema,
-    graphiql: true
-}));
-
-app.listen(3000, () => {
-    console.log('Listening on port 3000')
-});
+export default startApolloServer;
